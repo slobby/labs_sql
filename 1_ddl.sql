@@ -30,5 +30,5 @@ create table if not exists rating (
        studentId int,
        foreign key (teacherId) references teacher (id) on delete cascade,
        foreign key (studentId) references student (id) on delete cascade,
-       constraint CK_rating_mark check((mark >0 and mark <11))
+       constraint CK_rating_mark check((mark >0 and mark <=10))
 );

@@ -48,7 +48,7 @@ insert into rating
                 (8, 'java', 1, 6),
                 (7, 'python', 1, 4),
                 (6, 'english', 1, 5),
-                (5, 'java', 3, 1),
+                (8, 'java', 3, 1),
                 (7, 'physics', 2, 1),
 		(8, 'chemistry', 2, 2),
                 (7, 'python', 3, 2),
