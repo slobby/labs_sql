@@ -145,9 +145,9 @@ with res as (
 	   from intermediate
 )
 
-
 select name, max(math) as math, max(java) as java, max(python) as python from res
 group by name
+order by name
 
 
 --Task10

@@ -75,11 +75,11 @@ insert into rating
 		(4, 'english', 8, 3),
 		(3, 'physics', 7, 6),
 		(9, 'python', 7, 4),
-                (8, 'chemistry', 7, 1);
+                (8, 'chemistry', 7, 1),
                 (7, 'mathematics', 1, 4),
                 (5, 'java', 1, 3),
                 (9, 'python', 1, 6),
                 (9, 'english', 1, 2),
                 (4, 'physics', 2, 3),
 		(5, 'chemistry', 2, 1),
-                (8, 'java', 2, 3),
+                (8, 'java', 2, 3)
