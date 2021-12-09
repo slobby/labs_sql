@@ -85,6 +85,49 @@ join student
 on rating.studentid = student.id
 order by student.name, rating.subject;
 
+--Task7 var 1
+with res as (
+select student.name as name, rating.subject as subject, avg(rating.mark) over (partition by student.name, rating.subject ) as average from rating
+join student
+on rating.studentid = student.id
+order by student.name, rating.subject)
+select name, subject, avg(average) from res
+group by name, subject;
+
+--Task7 var 2
+with res as (
+select student.name as name, rating.subject as subject, avg(rating.mark) over (partition by student.name, rating.subject ) as average from rating
+join student
+on rating.studentid = student.id
+order by student.name, rating.subject
+)
+select name, subject, average from (select *, row_number() over(partition by  name, subject order by average) as row_num  from res) a
+where row_num=1
+
+--Task8
+with res as (
+	select student.name as name, avg(rating.mark) as average from student
+	inner join rating
+	on student.id = rating.studentid
+	group by (student.id)
+	)
+select name, 'good' as characteristics from res
+where average > 7
+union
+select name, 'bad' as characteristics from res
+where average <= 7
+
+--Task8 var
+with res as (
+	select student.name as name, avg(rating.mark) as average from student
+	inner join rating
+	on student.id = rating.studentid
+	group by (student.id)
+	)
+
+select name, (case when average > 7 then 'good' else 'bad' end) as characteristics from res
+
+
 
 
 
