@@ -155,6 +155,52 @@ create index if not exists name_idx on student (name)
 --pros: faster search
 --cons: due, "name" column is not  unique - when table will contain  lots of items with the same "names" the efficiency of index will reduce
 
+--Task11   (когда средний рейтинг всех студентов вообщем в департаменте > 6)
+select department.name,  avg(res.average) from (
+	select student.id as studentid, student.groupid as groupid, avg(rating.mark) as average from student
+	inner join rating
+	on rating.studentid = student.id
+	group by student.id
+	) as res
+	inner join "group"
+	on "group".id = res.groupid
+	inner join department
+	on "group".depid = department.id
+	group by department.id
+	having avg(res.average) > 6;
+
+--Task11   (когда средний рейтинг каждого студента в департаменте > 6)
+select department.name from (
+	select student.id as studentid, student.groupid as groupid, avg(rating.mark) as average from student
+	inner join rating
+	on rating.studentid = student.id
+	group by student.id
+	having avg(rating.mark) > 6
+	) as res
+	inner join "group"
+	on "group".id = res.groupid
+	inner join department
+	on "group".depid = department.id
+    group by department.id
+
+--Task13
+create temp table high_achiever(
+id serial primary key,
+student_name varchar(30),
+high_achiever_subject varchar(30)
+)
+
+--Task14
+select res.name as name, count(*) from
+	(select "group".name as name, count(rating.teacherid) as teacher_id_count from student
+	inner join rating
+	on rating.studentid = student.id
+	inner join "group"
+	on student.groupid = "group".id
+        group by "group".id, rating.teacherid) as res
+      group by res.name
+      order by name
+
 
 
 
