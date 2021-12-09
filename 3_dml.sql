@@ -80,14 +80,10 @@ from (
 where mark_rank=1
 
 --Task7
-select student.name, rating.subject, avg(rating.mark) over (partition by student.id order by rating.subject ) from rating
+select distinct  student.name, rating.subject, avg(rating.mark) over (partition by student.name, rating.subject ) from rating
 join student
-on rating.studentid = student.id;
-
--- select student.name, rating.subject, rating.mark from rating
--- join student
--- on rating.studentid = student.id
--- order by student.name
+on rating.studentid = student.id
+order by student.name, rating.subject;
 
 
 
